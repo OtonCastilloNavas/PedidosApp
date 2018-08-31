@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.mnAdd:
-            break;
+                Intent iPedido= new Intent(this, FormPedidoActivity.class);
+                startActivityForResult(iPedido,1234);
+                break;
             case R.id.mnArticulo:
                 Intent iArticulo = new Intent(this,ArticuloActivity.class);
                 startActivity(iArticulo);

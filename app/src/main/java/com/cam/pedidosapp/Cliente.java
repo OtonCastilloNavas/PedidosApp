@@ -1,10 +1,21 @@
 package com.cam.pedidosapp;
 
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
+@Entity
 public class Cliente implements Serializable {
+    @PrimaryKey
+    @NonNull
     private String id_cliente;
+    @NonNull
     private String nombre;
+
+    @Embedded(prefix = "negocio_")
     private Negocio negocio;
 
     public Cliente(String id_cliente, String nombre ) {

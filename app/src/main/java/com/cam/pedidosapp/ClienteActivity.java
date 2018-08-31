@@ -1,5 +1,6 @@
 package com.cam.pedidosapp;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,13 +21,22 @@ public class ClienteActivity extends AppCompatActivity {
     private ListView lvCliente;
     private List<Cliente> clientes= new ArrayList<>();
     private int posicion=-1;
+    private DataBase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente_list);
         setTitle("Cliente");
+        db= Room.databaseBuilder(this,
+                DataBase.class,
+                "Data")
+                .allowMainThreadQueries()
+                .build();
+        clientes.addAll(db.clienteDao().obtenerTodo());
         lvCliente=(ListView) findViewById(R.id.lvCliente);
-        ClienteAdapter adapter =  new ClienteAdapter(this,R.layout.listview_cliente_layout,clientes);
+        ClienteAdapter adapter =  new ClienteAdapter(this,
+                R.layout.listview_cliente_layout,
+                clientes);
         lvCliente.setAdapter(adapter);
         registerForContextMenu(lvCliente);
     }
@@ -65,7 +75,7 @@ public class ClienteActivity extends AppCompatActivity {
         }
         else
         {
-
+            db.clienteDao().borrar(clientes.get(info.position));
             clientes.remove(info.position);
             ((ClienteAdapter)lvCliente.getAdapter()).notifyDataSetChanged();
         }
@@ -78,11 +88,13 @@ public class ClienteActivity extends AppCompatActivity {
         {
             Cliente cliente= (Cliente) data.getExtras().get("cliente");
             if(requestCode==1234) {
+                db.clienteDao().insertar(cliente);
                 clientes.add(cliente);
             }
             else
             {
-             clientes.set(posicion,cliente);
+                db.clienteDao().actualizar(cliente);
+                clientes.set(posicion,cliente);
             }
             ((ClienteAdapter)lvCliente.getAdapter()).notifyDataSetChanged();
         }

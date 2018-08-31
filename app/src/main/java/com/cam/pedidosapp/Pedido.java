@@ -1,13 +1,28 @@
 package com.cam.pedidosapp;
 
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.Date;
 import java.util.List;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity(foreignKeys = @ForeignKey(entity = Cliente.class,
+parentColumns = "id_cliente",
+childColumns = "id_cliente",
+onDelete = CASCADE,
+onUpdate = CASCADE))
 public class Pedido {
 
+    @PrimaryKey(autoGenerate = true)
     private int id_pedido;
     private Date fecha;
     private float total;
+
+    private String id_cliente;
     private Cliente cliente;
     private List<DetallePedido> pedidoList;
 

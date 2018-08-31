@@ -16,6 +16,7 @@ public class FormClienteActivity extends AppCompatActivity {
     private EditText etNombre;
     private TextView tvNegocio;
     private Cliente cliente= new Cliente();
+    //private
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

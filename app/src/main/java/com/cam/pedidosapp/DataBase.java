@@ -3,7 +3,8 @@ package com.cam.pedidosapp;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-@Database(version = 1, entities = {Articulo.class})
+@Database(version = 2, entities = {Articulo.class, Cliente.class})
 public abstract class DataBase extends RoomDatabase {
     public  abstract ArticuloDao articuloDao();
+    public  abstract ClienteDao clienteDao();
 }

@@ -17,6 +17,7 @@ public class FormNegocioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_negocio);
+        setTitle("Negocio");
         etDireccion=(EditText) findViewById(R.id.etDireccion);
         etNombre=(EditText) findViewById(R.id.etNombre);
         etTelefono=(EditText) findViewById(R.id.etTelefono);

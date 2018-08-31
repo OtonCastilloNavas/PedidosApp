@@ -21,7 +21,8 @@
         <activity android:name=".FormClienteActivity" />
         <activity android:name=".FormDetalleActivity" />
         <activity android:name=".ClienteActivity" />
-        <activity android:name=".ArticuloActivity"></activity>
+        <activity android:name=".ArticuloActivity" />
+        <activity android:name=".FormPedidoActivity"></activity>
     </application>
 
 </manifest>
