@@ -22,6 +22,11 @@ public class Cliente implements Serializable {
         this.id_cliente = id_cliente;
         this.nombre = nombre;
     }
+    public Cliente(String id_cliente, String nombre, Negocio negocio ) {
+        this.id_cliente = id_cliente;
+        this.nombre = nombre;
+        this.negocio=negocio;
+    }
     public Cliente() {
 
     }

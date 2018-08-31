@@ -3,6 +3,8 @@ package com.cam.pedidosapp;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
@@ -12,30 +14,41 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(foreignKeys = @ForeignKey(entity = Cliente.class,
 parentColumns = "id_cliente",
-childColumns = "id_cliente",
+childColumns = "cliente_id_cliente",
 onDelete = CASCADE,
-onUpdate = CASCADE))
+onUpdate = CASCADE), indices = {@Index("cliente_id_cliente")})
 public class Pedido {
 
     @PrimaryKey(autoGenerate = true)
     private int id_pedido;
-    private Date fecha;
+    private String fecha;
     private float total;
+    private String cliente_id_cliente;
 
-    private String id_cliente;
+    @Ignore
     private Cliente cliente;
+
+    @Ignore
     private List<DetallePedido> pedidoList;
 
     public Pedido() {
 
     }
 
-    public Pedido(int id_pedido, Date fecha, float total, Cliente cliente, List<DetallePedido> pedidoList) {
+    public Pedido(int id_pedido, String fecha, float total, Cliente cliente, List<DetallePedido> pedidoList) {
         this.id_pedido = id_pedido;
         this.fecha = fecha;
         this.total = total;
         this.cliente = cliente;
         this.pedidoList = pedidoList;
+    }
+
+    public String getCliente_id_cliente() {
+        return cliente_id_cliente;
+    }
+
+    public void setCliente_id_cliente(String cliente_id_cliente) {
+        this.cliente_id_cliente = cliente_id_cliente;
     }
 
     public int getId_pedido() {
@@ -46,11 +59,11 @@ public class Pedido {
         this.id_pedido = id_pedido;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
